@@ -61,6 +61,7 @@ import {
   DataSourceForm,
   ApiForm,
 } from "./helper";
+import { color } from "styled-system";
 
 const userRegion = config.cognito.USER_IDENTITY_POOL_ID.split(":")[0];
 
@@ -400,9 +401,9 @@ const ProjectDetails = props => {
             size="18px"
             iconify={hazardSymbol}
             className="icon"
-            color="orange"
+            color={colors.ChangesWarning}
           />
-          <Text fontSize="xs" ml={5} color="#EDA436">
+          <Text fontSize="xs" ml={5} color={colors.ChangesWarning}> 
             Unsaved Changes
           </Text>
           <Button
@@ -703,7 +704,7 @@ const ProjectDetails = props => {
             <Flex
               width="584px"
               style={{
-                border: "1px solid #393838",
+                border: `1px solid ${colors.borderPrimary}`,
                 padding: 24,
                 width: "100%",
                 borderRadius: 8,
@@ -1310,7 +1311,7 @@ const ProjectDetails = props => {
                     // passAssetInfo={passAssetInfo}
                   />
                 </Flex>
-                <Divider as={"div"} color="#393838" mb={56} />
+                <Divider as={"div"} color={colors.borderPrimary} mb={56} />
                 <Box>
                   <Text style={{ textTransform: "uppercase" }}>
                     Product Images
@@ -1339,7 +1340,7 @@ const ProjectDetails = props => {
                   onFinish={updateAssetStatus}
                   colors={colors}
                 />
-                <Divider as={"div"} color="#393838" />
+                <Divider as={"div"} color={colors.borderPrimary} />
 
                 <C.AssetContainer
                   state={state.screenShot2}
@@ -1350,7 +1351,7 @@ const ProjectDetails = props => {
                   onFinish={updateAssetStatus}
                   colors={colors}
                 />
-                <Divider as={"div"} color="#393838" />
+                <Divider as={"div"} color={colors.borderPrimary} />
 
                 <C.AssetContainer
                   state={state.screenShot3}
@@ -1572,11 +1573,11 @@ const ProjectDetails = props => {
 
                   <Flex
                     style={{
-                      border: "1px dashed #373436",
+                      border: `1px dashed ${colors.subtleHiover}`,
                       width: 438,
                       height: 272,
                       borderRadius: 4,
-                      background: "#6B6669",
+                      background: `${colors.graySecondary}`,
                       flexDirection: "column",
                       justifyContent: "center",
                       alignItems: "center",

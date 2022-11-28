@@ -74,31 +74,30 @@ const breatheAnimation = keyframes`
 0% {-webkit-transform: scale(0.1, 0.1); opacity: 0.0;}
 50% {opacity: 1.0;}
 100% {-webkit-transform: scale(1.2, 1.2); opacity: 0.0;}
-webkit-animation: pulsate 0.03 ease-out;
-webkit-animation-iteration-count: infinite; 
 `;
+
 const Circle = styled.div`
 width: 9px;
 height: 9px;
-background-color: #62bd19;
+background-color: ${props => props.theme.colors.SandboxSuccess};
 border-radius: 50%;
 position: absolute;
-
-}
 `;
 
 const Ring = styled.div`
-border: 3px solid #62bd19;
+border: 3px solid ${props => props.theme.colors.SandboxSuccess};
+border-radius: 30px;
 -webkit-border-radius: 30px;
 height: 25px;
 width: 25px;
 position: absolute;
 left: -8px;
 top: -8px;
--webkit-animation: pulsate 2s ease-out;
+animation: ${breatheAnimation} 2s ease-out;
+-webkit-animation: ${breatheAnimation} 2s ease-out;
+animation-iteration-count: infinite; 
 -webkit-animation-iteration-count: infinite; 
-opacity: 0.0
-}
+opacity: 0.0;
 animation-name: ${breatheAnimation};
 `;
 
@@ -125,7 +124,7 @@ const BottomContainer = styled.div`
   height: ${props => props.height}px;
   background-color: ${props => props.theme.colors.baseMuted};
   border-radius: 16px 16px 0px 0px;
-  border-top: 1px solid #4b484a;
+  border-top: ${props => props.theme.componentStyles.input.base.border};
 `;
 
 const WidgetWrapper = styled.div`
@@ -183,14 +182,14 @@ const TypeBadge = styled.span`
   padding-right: 8px;
   padding-left: 8px;
   font-size: 10px;
-  border: 1px solid ${props => (props.type === 2 ? "#FC62C1" : "#CB8E12")};
-  color: ${props => (props.type === 2 ? "#FC62C1" : "#CB8E12")};
+  border: 1px solid ${props => (props.type === 2 ? props.theme.colors.brandAccent : props.componentStyles.alert.warning.color)};
+  color: ${props => (props.type === 2 ? props.theme.colors.brandAccent : props.componentStyles.alert.warning.color)};
 `;
 
 export const CustomSelect = styled.select`
   border-radius: 8px;
-  border: 1px solid: #6B6669;
-  color: #F5F8F7DE;
+  border: ${props => props.theme.borders.select.gray};
+  color: ${props => props.theme.colors.textPrimary};
   padding: 5px;
   font-size: 12px;
   background: transparent;
@@ -198,19 +197,18 @@ export const CustomSelect = styled.select`
   width: 110px;
   outline: none;
   cursor:pointer;
-
 `;
 
 const IconContainer = styled(Flex)`
   border-radius: 2px;
   padding: 4px;
-  background: ${props => (props.disabled === true ? "#4B484A" : "gray")};
+  background: ${props => props.disabled ? props.theme.colors.SandboxButtonOff : "gray"};
   height: 32px;
   width: 32px;
   cursor: pointer;
 
   :active {
-    background: ${props => (props.disabled === true ? null : "lightgray")};
+    background: ${props => props.disabled ? null : "lightgray"};
   }
 `;
 

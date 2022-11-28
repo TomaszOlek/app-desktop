@@ -22,7 +22,7 @@ export const CustomSelect = styled.select`
   color: white;
   padding: 8px;
   font-size: 12px;
-  background: #aa076b;
+  background: ${props => props.theme.colors.baseSecondary}; 
   height: 30px;
   width: 300px;
   &:focus {
@@ -64,7 +64,7 @@ export function AddRemoveDataSources({
           mr={16}
           style={{
             padding: 5,
-            border: "1px solid #28C3E8",
+            border: "1px solid #28C3E8", //toadd
             borderRadius: 20,
             height: 22,
             alignItems: "center",

@@ -36,11 +36,11 @@ const StyledBox = styled(Box)`
   border-radius: 5px;
   align-items: center;
   z-index: 1;
-  border: null;
+  border: none;
   // background: linear-gradient(180deg, #aa076b 0%, #61045f 100%);
   // background-image: url(${cardPrifinaLogo});
   background: url(${cardPrifinaLogo}),
-    linear-gradient(180deg, #aa076b 0%, #61045f 100%);
+    ${props => props.theme.colors.brandAccentGradient};
   background-repeat: no-repeat;
   background-position: right center;
 `;
@@ -104,7 +104,7 @@ const CreateProjectModal = ({ onClose, onButtonClick, ...props }) => {
       >
         <ModalContent
           style={{
-            background: colors.baseTertiary,
+            background: theme.colors.baseTertiary,
             width: "806px",
             height: "412px",
             borderRadius: 5,
@@ -144,7 +144,7 @@ const CreateProjectModal = ({ onClose, onButtonClick, ...props }) => {
                     <Text fontSize="xs">{i18n.__("widget")}</Text>
                   </Flex>
                 </Flex>
-                <Text paddingTop="10px" paddingBottom="16px" color="#ADADAD">
+                <Text paddingTop="10px" paddingBottom="16px" color={theme.colors.textSecondary}>
                   {i18n.__("projectName")}
                 </Text>
                 <Input
@@ -179,16 +179,16 @@ const CreateProjectModal = ({ onClose, onButtonClick, ...props }) => {
                         {i18n.__("prifinaAppId")}
                       </Text>
                     </Flex>
-                    <Text color="#ADADAD" fontSize="xs">
+                    <Text color={theme.colors.textSecondary} fontSize="xs">
                       {i18n.__("prifinaAppIdText")}
                     </Text>
-                    <Text color="#ADADAD" fontSize="xs" paddingTop="7px">
+                    <Text color={theme.colors.textSecondary} fontSize="xs" paddingTop="7px">
                       {i18n.__("copyAndAddToYourBuild")}
                     </Text>
                   </Box>
                 </StyledBox>
                 <Text
-                  color="#ADADAD"
+                  color={theme.colors.textSecondary}
                   fontSize="xs"
                   paddingTop="34px"
                   paddingBottom="4px"

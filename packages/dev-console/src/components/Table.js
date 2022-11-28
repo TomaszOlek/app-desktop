@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useTable, usePagination } from "react-table";
 
-import { Box, Text } from "@blend-ui/core";
+import { Box, Text, useTheme } from "@blend-ui/core";
 
 import { i18n } from "@prifina-apps/utils";
 
@@ -46,7 +46,7 @@ table {
         border-bottom: 0;
       }
     }
-cursor: pointer;
+  cursor: pointer;
     
   }
   th {
@@ -54,14 +54,14 @@ cursor: pointer;
     padding-right: 16px;
     text-align: center;
     height: 55px;
-    border-bottom: 1px solid #4b4b4b;
+    border-bottom: ${props => props.theme.componentStyles.textarea.base.border};
 
-  },
+  }
   td {
     height:40px;
     margin: 0;
     //   padding: 0.5rem;
-    border-bottom: 1px solid #4b4b4b;
+    border-bottom:${props => props.theme.componentStyles.textarea.base.border};
     text-align: center;
 
 
@@ -72,15 +72,16 @@ cursor: pointer;
 }
 
 table td.status,table td.date,table td.version,table td.appType {
-  text-align: center
+  text-align: center;
 
   .pagination {
-    background: #231d35;
+    background: #231d35; //toadd
     padding-top: 36px;
     padding-left: 16px;
     font-size: 12px;
-    color: #d2d2d2;
+    color: ${props => props.theme.colors.lightGray};
   }
+}
 `;
 
 function Table({ columns, data }) {
@@ -111,6 +112,8 @@ function Table({ columns, data }) {
     },
     usePagination,
   );
+
+  const { colors } = useTheme();
 
   // Render the UI for your table
   return (
@@ -180,7 +183,7 @@ function Table({ columns, data }) {
               }}
               iconify={feDropLeft}
               onClick={() => gotoPage(0)}
-              color={!canPreviousPage ? "#ADADAD" : "white"}
+              color={!canPreviousPage ? colors.textSecondary : "white"}
             />
             <BlendIcon
               style={{
@@ -188,7 +191,7 @@ function Table({ columns, data }) {
               }}
               iconify={feArrowLeft}
               onClick={() => previousPage()}
-              color={!canPreviousPage ? "#ADADAD" : "white"}
+              color={!canPreviousPage ? colors.textSecondary : "white"}
             />
             <BlendIcon
               style={{
@@ -196,7 +199,7 @@ function Table({ columns, data }) {
               }}
               iconify={feArrowRight}
               onClick={() => nextPage()}
-              color={!canNextPage ? "#ADADAD" : "white"}
+              color={!canNextPage ? colors.textSecondary : "white"}
             />
             <BlendIcon
               style={{
@@ -204,14 +207,14 @@ function Table({ columns, data }) {
               }}
               iconify={feDropRight}
               onClick={() => gotoPage(pageCount - 1)}
-              color={!canNextPage ? "#ADADAD" : "white"}
+              color={!canNextPage ? colors.textSecondary : "white"}
             />
           </div>
         </div>
       </Styles>
     </>
   );
-}
+};
 
 Table.propTypes = {
   columns: PropTypes.instanceOf(Array),

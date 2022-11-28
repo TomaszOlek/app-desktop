@@ -18,15 +18,15 @@ import { useDrop } from "react-dnd";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
-const style = {
-  border: "1px dashed #969595",
-  width: 451,
-  height: 132,
-  borderRadius: 4,
-  background: "transparent",
-  alignItems: "center",
-  justifyContent: "center",
-};
+const UploadField = styled(Flex)`
+  border: ${props => props.theme.borders.uploadField.base};
+  width: 451px;
+  height: 132px;
+  border-radius: 4px;
+  background: transparent;
+  align-items: center;
+  justify-content: center;
+`;
 
 const StyledButton = styled(Button)`
   &:hover {
@@ -134,7 +134,7 @@ const TargetBox = ({ onDrop, colors, widgetId }) => {
 
   const isActive = canDrop && isOver;
   return (
-    <Flex style={style} ref={drop}>
+    <UploadField ref={drop}>
       {/* <Text ref={drop}>
         {isActive ? "Release to drop" : "Drag file here"}
       </Text> */}
@@ -157,7 +157,7 @@ const TargetBox = ({ onDrop, colors, widgetId }) => {
           </StyledButton>
         </Flex>
       )}
-    </Flex>
+    </UploadField>
   );
 };
 

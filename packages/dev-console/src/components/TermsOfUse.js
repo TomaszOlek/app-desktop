@@ -20,11 +20,11 @@ const Container = styled(Flex)`
 
 const StyledBox = styled(Box)`
   scrollbar-width: 4px;
-  scrollbar-color: ${props =>
-      props.colors ? props.colors.baseSecondary : "#00847A"}
-    ${props =>
-      props.colors ? props.colors.baseTertiary : "rgba(0, 132, 122, 0.1)"};
-
+  scrollbar-color:  '
+  ${props => props.colors ? props.colors.baseSecondary : "#00847A"}
+  ${props.colors ? props.colors.baseTertiary : "rgba(0, 132, 122, 0.1)"}
+  ';
+  
   overflow-y: scroll;
   ::-webkit-scrollbar {
     -webkit-appearance: none;

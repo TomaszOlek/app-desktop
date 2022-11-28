@@ -6,9 +6,8 @@ export const StyledBox = styled(Box)`
   /* border-radius: 20px; */
   height: 100vh;
   z-index: 1;
-  border: 1px solid #f5f8f7;
-  background-color: ${(props) =>
-    props.colors ? props.colors.baseWhite : "#F5F8F7"};
+  border: ${props => props.borders.input.disabled};
+  background-color: ${props => props.colors.baseWhite};
 `;
 export const StyledBackground = styled(Box)`
   background-image: url(${Background});
@@ -18,7 +17,6 @@ export const StyledBackground = styled(Box)`
   width: 100%;
   height: 631px;
   z-index: 2;
-  border: 1px solid #f5f8f7;
-  background-color: ${(props) =>
-    props.colors ? props.colors.baseWhite : "#F5F8F7"};
+  border: ${props => props.borders.input.disabled};
+  background-color: ${props => props.colors.baseWhite};
 `;

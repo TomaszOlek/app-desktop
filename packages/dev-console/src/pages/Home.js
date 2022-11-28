@@ -451,7 +451,7 @@ const Main2 = ({ data, currentUser }) => {
                 width="1027px"
                 justifyContent="space-between"
               >
-                {resourceCardItems.map((item, index) => (
+                {/* {resourceCardItems.map((item, index) => (
                   <C.ResourceCard
                     key={index}
                     marginRight="42px"
@@ -459,7 +459,7 @@ const Main2 = ({ data, currentUser }) => {
                     title={item.title}
                     description={item.description}
                   />
-                ))}
+                ))} */}
               </Flex>
             </Box>
           </>
@@ -637,7 +637,7 @@ const Main = ({ data, currentUser }) => {
         </Box>
         <Box marginTop="48px" marginLeft={"20px"}>
           <Grid columns="repeat(auto-fit,minmax(120px,1fr))">
-            {resourceCardItems.map((item, index) => (
+            {/* {resourceCardItems.map((item, index) => (
               <Cell key={"card-" + index}>
                 <C.ResourceCard
                   src={item.src}
@@ -645,7 +645,7 @@ const Main = ({ data, currentUser }) => {
                   description={item.description}
                 />
               </Cell>
-            ))}
+            ))} */}
           </Grid>
         </Box>
       </Box>

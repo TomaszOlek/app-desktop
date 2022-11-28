@@ -8,15 +8,22 @@ const textSecondary = "#ADA9AB";
 
 const brandAccent = "#E33FA4";
 
-const baseWhite = "#F5F8F7DE";
+const baseWhite = "#F5F8F7";
 const baseHover = "#c91684";
 const baseMuted = "#292828";
 
 const borderPrimary = "#393838";
 
 const baseBright = "#4B4B4B";
+const baseDevider = "#343233"
+const ListItemText = "#8C80A0"
+const ChangesWarning = "#EDA436"
+const SandboxSuccess = "#62bd19"
+const SandboxButtonOff = "#4B484A"
 
 const subtleHiover = "#373436";
+const graySecondary = "#6B6669";
+const lightGray = "#d2d2d2"
 
 const textMuted = "#969595";
 
@@ -46,6 +53,14 @@ const colors = {
   baseBright,
   subtleHiover,
   landingGradient,
+  baseDevider,
+  borderPrimary,
+  ListItemText,
+  ChangesWarning,
+  SandboxSuccess,
+  SandboxButtonOff,
+  graySecondary,
+  lightGray,
   text: {
     muted: baseBright,
   },
@@ -71,6 +86,7 @@ const borders = {
   select: {
     base: `${borderWidths["2xs"]} solid ${colors.baseMuted}`,
     borderRadius: radii["input"],
+    gray: `${borderWidths["2xs"]} solid ${colors.graySecondary}`,
   },
   button: {
     base: `${borderWidths["2xs"]} solid ${colors.baseSecondary}`,
@@ -79,6 +95,9 @@ const borders = {
     hoverError: `${borderWidths["2xs"]} solid ${colors.baseErrorHover}`,
     borderRadius: radii["input"],
   },
+  uploadField: {
+    base: `${borderWidths["2xs"]} dashed ${colors.textMuted}`
+  }
 };
 
 const baseProps = {

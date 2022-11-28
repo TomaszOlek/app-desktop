@@ -9,12 +9,13 @@ import zendIcon from "@iconify/icons-mdi/zend";
 import PropTypes from "prop-types";
 
 const CustomBox = ({ icon, title, description, buttonName, onClick }) => {
+  const theme = useTheme()
   return (
     <Flex
       bg="baseTertiary"
       width=" 395px"
       height="226px"
-      border="1px solid #6B6669"
+      border={theme.borders.select.gray}
       padding="25px"
       justifyContent="space-between"
       flexDirection="column"

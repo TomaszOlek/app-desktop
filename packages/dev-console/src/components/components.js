@@ -36,7 +36,7 @@ const SidebarContainer = styled(Flex)`
   display: inline-block;
   vertical-align: middle;
   margin-right: 10px;
-  border-right: 1px solid #343233;
+  border-right: 1px solid ${props => props.theme.colors.baseDevider};
 
   /*
   ::before,
@@ -124,7 +124,7 @@ const MenuBadge = styled.span`
   align-items: center;
   padding-right: 16px;
   padding-left: 16px;
-  border: 1px solid #f6ad55;
+  border: 1px solid ${props => props.palette.orange[300]};
 `;
 export const PublisherCard = styled(Flex)`
   width: 198px;
@@ -138,7 +138,7 @@ export const PublisherCard = styled(Flex)`
 `;
 
 export const StyledInput = styled(Input)`
-  border: 1px solid #4b4b4b;
+  border: 1px solid ${props => props.theme.baseBright};
   width: ${props => props.width || "361px"};
   height: 35px;
 `;
@@ -155,7 +155,7 @@ export const ListItemIconLink = ({
     <BlendIcon size="18px" iconify={icon} className="icon" />
     <Text
       className="text"
-      color="##8C80A0"
+      color={color}
       ml="16px"
       fontSize="14px"
       textStyle="h7"
@@ -176,8 +176,7 @@ ListItemIconLink.propTypes = {
 };
 
 export const DevConsoleSidebar = ({
-  // theme,
-
+  theme,
   items,
   pointerBackground,
   pointerIconColor,
@@ -187,11 +186,12 @@ export const DevConsoleSidebar = ({
 }) => {
   console.log("SIDEBAR ", props);
 
-  const { colors } = useTheme();
+  const defaultTheme = useTheme();
+  theme = theme || defaultTheme;
 
   return (
     <SidebarContainer bg="basePrimary">
-      <Divider mb={41} color="#343233" />
+      <Divider mb={41} color={theme.colors.baseDevider} />
 
       <Text fontSize="xs" ml="16px" mb="16px">
         Developer Account
@@ -216,10 +216,10 @@ export const DevConsoleSidebar = ({
               pointerTextColor={pointerTextColor}
               {...rest}
             >
-              <ListItemIconLink icon={icon} label={label}>
+              <ListItemIconLink icon={icon} label={label} color={theme.colors.ListItemText}>
                 {badgeText ? (
                   <MenuBadge ml={0}>
-                    <Text fontSize="xs" style={{ color: "#f6ad55" }}>
+                    <Text fontSize="xs">
                       {badgeText}
                     </Text>
                   </MenuBadge>
@@ -229,7 +229,7 @@ export const DevConsoleSidebar = ({
           ),
         )}
       </ListMenu>
-      <Divider mt={106} color="#343233" />
+      <Divider mt={106} color={theme.colors.baseDevider} />
 
       <Text fontSize="xs" ml="16px" mt="41px" mb="16px">
         {i18n.__("createPubAccCTATitle")}
@@ -282,7 +282,7 @@ export const ResourceCard = ({ title, description, src }) => {
         <Text fontSize="sm" paddingBottom="5px">
           {title}
         </Text>
-        <Text color="#ADADAD" fontSize="xxs">
+        <Text color={colors.textSecondary} fontSize="xxs">
           {description}
         </Text>
       </Box>
@@ -516,8 +516,8 @@ AssetContainer.propTypes = {
 
 export const CustomSelect = styled.select`
   border-radius: 8px;
-  border: 1px solid: #6B6669;
-  color: #F5F8F7DE;
+  border: ${props => props.theme.borders.select.gray};
+  color: ${props => props.theme.colors.baseWhite};
   padding: 5px;
   font-size: 12px;
   background: transparent;
@@ -537,7 +537,7 @@ export const FieldContainer = styled(Flex)`
 
 export const InnerContainer = styled(Box)`
   width: 100%;
-  border: 1px solid #393838;
+  border: 1px solid ${props => props.theme.borderPrimary};
   padding: 24px;
   border-radius: 8px;
   margin-bottom: 16px;

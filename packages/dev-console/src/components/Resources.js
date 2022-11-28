@@ -29,7 +29,7 @@ const ItemContainer = styled(Box)`
   width: 490.5px;
   height: 226px;
 
-  background: #373436;
+  background: ${props => props.theme.colors.subtleHiover};
   border-radius: 8px;
   cursor: pointer;
 `;

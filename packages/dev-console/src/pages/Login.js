@@ -45,14 +45,14 @@ i18n.init();
 const InnerBox = styled(Box)`
   width: 354px;
   height: 118px;
-  border: 1px solid #6b6669;
-  background: #373436;
+  border: ${props => props.theme.borders.select.gray};
+  background: ${props => props.theme.colors.subtleHiover};
   border-radius: 4px;
   padding: 16px;
 `;
 
 const LoginContainer = styled(Box)`
-  background: ${props => props.background || null};
+  background: ${props => props.theme.colors.baseTertiary};
   width: 534px;
   display: flex;
   flex-direction: column;
@@ -308,7 +308,7 @@ const Login = () => {
         >
           <Image src={landingImage} />
         </Box>
-        <LoginContainer background="#272626">
+        <LoginContainer>
           {step === 0 && (
             <Box textAlign="start" width="354px">
               <Flex mb={57} alignSelf="flex-start">
