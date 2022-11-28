@@ -39,7 +39,7 @@ import { S3Client } from "@aws-sdk/client-s3";
 const GlobalStyle = createGlobalStyle`
   body {
    ${baseStyles};
-   background-color: ${props.theme.colors.backgroundSecondary};
+   background-color: ${props => props.theme.colors.backgroundSecondary};
   }
 `;
 const APIConfig = {
