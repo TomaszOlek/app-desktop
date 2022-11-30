@@ -10,7 +10,7 @@ import addCircle from "@iconify/icons-mdi/add-circle";
 import trashCan from "@iconify/icons-mdi/trash-can";
 import mdiPowerPlug from "@iconify/icons-mdi/power-plug";
 
-import * as C from "../components/components";
+import * as C from "./components";
 
 import styled from "styled-components";
 
@@ -64,7 +64,7 @@ export function AddRemoveDataSources({
           mr={16}
           style={{
             padding: 5,
-            border: "1px solid #28C3E8", //toadd
+            border: "1px solid #28C3E8",
             borderRadius: 20,
             height: 22,
             alignItems: "center",
@@ -220,10 +220,16 @@ export function DataSourceForm({ addDataSource, selectOptions }) {
 
   console.log("SELECT OPTIONS value", value);
 
+  const { colors } = useTheme();
+
   return (
     <form onSubmit={handleSubmit}>
       <Flex alignItems="center">
-        <C.CustomSelect ref={selectRef} onChange={handleChange}>
+        <C.CustomSelect 
+          ref={selectRef} 
+          onChange={handleChange}
+          style={{backgroundColor: colors.baseMuted}}
+        >
           {selectOptions.map((item, index) => (
             <option key={index}>{item.source}</option>
           ))}

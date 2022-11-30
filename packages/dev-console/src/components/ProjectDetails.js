@@ -1465,6 +1465,7 @@ const ProjectDetails = props => {
                             />
                           </Flex>
                           <Flex>
+                          {/* <AddRemoveDataSources/> */}
                             {dataSourcePreview.length > 0 && (
                               <Flex
                                 width="100%"
