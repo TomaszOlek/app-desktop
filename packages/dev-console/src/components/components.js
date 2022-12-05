@@ -248,6 +248,7 @@ export const DevConsoleSidebar = ({
 };
 
 DevConsoleSidebar.propTypes = {
+  theme: PropTypes.instanceOf(Object),
   items: PropTypes.instanceOf(Array),
   pointerBackground: PropTypes.string,
   pointerIconColor: PropTypes.string,
@@ -512,6 +513,7 @@ export const AssetContainer = ({
 
 AssetContainer.propTypes = {
   src: PropTypes.string,
+  colors: PropTypes.object,
 };
 
 export const CustomSelect = styled.select`
