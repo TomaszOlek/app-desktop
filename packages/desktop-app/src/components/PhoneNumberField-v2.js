@@ -1,4 +1,10 @@
-import React, { useState, useReducer, useEffect, useRef, forwardRef } from "react";
+import React, {
+  useState,
+  useReducer,
+  useEffect,
+  useRef,
+  forwardRef,
+} from "react";
 
 import { SearchSelect } from "@blend-ui/search-select";
 import { BlendIcon } from "@blend-ui/icons";
@@ -26,21 +32,22 @@ const StyledBox = styled("div")`
       ? props.height
       : props.theme.componentStyles.input.base.height};
 
-  background-color: #f5f8f7;
+  background-color: ${props => props.theme.colors.fullWhite};
 
   /*
       background-color: ${props =>
     props.disabled
       ? props.theme.colors.text.muted
       : props.theme.componentStyles.input.base.backgroundColor ||
-      "transparent"};
-            */
+        "transparent"};
+  */
+
   border: ${props =>
     typeof props.borders !== "undefined"
       ? props.borders
       : props.errorinput
-        ? props.theme.borders.input.error
-        : props.theme.componentStyles.input.base.border};
+      ? props.theme.borders.input.error
+      : props.theme.componentStyles.input.base.border};
   border-radius: ${props =>
     typeof props.borderRadius !== "undefined"
       ? props.borderRadius
@@ -98,13 +105,11 @@ const LeftIcon = styled(props => {
 `;
 
 const PhoneNumberField = forwardRef(
-  ({
-    options,
-    selectOptions,
-    disabled, inputState, ...props }, ref) => {
-
+  ({ options, selectOptions, disabled, inputState, ...props }, ref) => {
     console.log("OPTS ", options);
-    const checkCognitoAttributeQuery = useStore(state => state.checkCognitoAttributeQuery);
+    const checkCognitoAttributeQuery = useStore(
+      state => state.checkCognitoAttributeQuery,
+    );
 
     const boxRef = useRef();
     const theme = useTheme();
@@ -134,9 +139,9 @@ const PhoneNumberField = forwardRef(
 
     useEffect(() => {
       console.log("UPDATE ", inputError);
-      ref.current.dataset['isvalid'] = !inputError;
+      ref.current.dataset["isvalid"] = !inputError;
       inputState(isPhoneNumber.current);
-    }, [inputError])
+    }, [inputError]);
 
     const selectOnChange = (e, code) => {
       console.log("CODE ", code);
@@ -144,12 +149,11 @@ const PhoneNumberField = forwardRef(
       ref.current.focus();
       setPhoneNumber(code);
       //console.log("REF ", ref)
-    }
+    };
     /*
     const validatePhoneNumberRegex = /^\+?[1-9][0-9]{7,14}$/;
     validatePhoneNumberRegex.test('+12223334444'); // Returns true
     */
-
 
     /*
       const checkPhoneAttr = (region, phone, phoneOpts = {}) => {
@@ -248,36 +252,35 @@ const PhoneNumberField = forwardRef(
       };
       */
 
-
     //console.log("FLAGS ", selectOptions);
     //console.log(isValidNumber("+35804007077102"))
-    const handleChange = (e) => {
+    const handleChange = e => {
       const entry = e.target.value;
       if (checkInput(entry) || entry.length === 0) {
         console.log("ENTRY OK ", entry);
         setPhoneNumber(entry);
       } else {
-        // 
+        //
         ref.current.value = phoneNumber;
         e.preventDefault();
       }
-    }
-
-    const checkPhoneNumberAttr = phoneNum => {
-      console.log("CHECKING ", phoneNum)
-      return checkCognitoAttributeQuery(
-        "phone_number",
-        phoneNum
-      );
     };
 
-    const phoneAlert = (errorMsg) => {
+    const checkPhoneNumberAttr = phoneNum => {
+      console.log("CHECKING ", phoneNum);
+      return checkCognitoAttributeQuery("phone_number", phoneNum);
+    };
+
+    const phoneAlert = errorMsg => {
       //console.log("ALERTS ", errorMsg, alerts.check());
-      if (errorMsg !== "" && !alerts.check().some(alert => alert.message === errorMsg)) {
+      if (
+        errorMsg !== "" &&
+        !alerts.check().some(alert => alert.message === errorMsg)
+      ) {
         alerts.error(errorMsg, {});
       }
     };
-    const updateCheckStatus = (status) => {
+    const updateCheckStatus = status => {
       if (status) {
         setInputError(true);
         setInvalidTxt(options.txt.invalidTxt);
@@ -286,11 +289,17 @@ const PhoneNumberField = forwardRef(
           phoneAlert(options.txt.invalidTxt);
         }
       }
-    }
+    };
     const checkInput = (phoneInput, checkIsValidNumber = false) => {
-      let phone = typeof phoneInput === "string" ? phoneInput : ref.current.value;
+      let phone =
+        typeof phoneInput === "string" ? phoneInput : ref.current.value;
 
-      console.log("INPUT CHECK ", phone, checkIsValidNumber, selectRef.current.value);
+      console.log(
+        "INPUT CHECK ",
+        phone,
+        checkIsValidNumber,
+        selectRef.current.value,
+      );
       if (!phone.startsWith("+") && selectRef.current.value !== "") {
         if (phone.startsWith("0")) {
           phone = phone.substr(1);
@@ -304,15 +313,15 @@ const PhoneNumberField = forwardRef(
       if (phone.startsWith("+")) {
         checkNumber = phone.substr(1);
       }
-      // allow only digits... 
-      if ((checkNumber.length > 0 && !onlyDigitChars(checkNumber))) {
+      // allow only digits...
+      if (checkNumber.length > 0 && !onlyDigitChars(checkNumber)) {
         isPhoneNumber.current = {};
         setInputError(true);
         setInvalidTxt(options.txt.invalidTxt);
         return false;
       } else if (phone.length > 0 && checkIsValidNumber) {
         const checkResult = isValidNumber(phone);
-        console.log("CHECK RES ", checkResult)
+        console.log("CHECK RES ", checkResult);
         let phoneState = Object.keys(checkResult).length > 0;
         if (!phoneState || checkResult.nationalNumber.length < 6) {
           console.log("CHECK ERRORS ", phoneState, phone, checkIsValidNumber);
@@ -320,7 +329,7 @@ const PhoneNumberField = forwardRef(
           updateCheckStatus(true);
         } else {
           if (options.checkExists) {
-            // checking if phone number exists.... 
+            // checking if phone number exists....
             checkPhoneNumberAttr(phone).then(res => {
               console.log("ATTR RES ", res);
               isPhoneNumber.current = checkResult;
@@ -331,7 +340,6 @@ const PhoneNumberField = forwardRef(
               updateCheckStatus(res);
               if (!res) {
                 //setIsPhoneNumber(checkResult);
-
               }
             });
           } else {
@@ -345,10 +353,8 @@ const PhoneNumberField = forwardRef(
             //setIsPhoneNumber(checkResult);
 
             setInvalidTxt("");
-
           }
         }
-
       } else {
         console.log("GOOD NUMBER....");
 
@@ -357,104 +363,116 @@ const PhoneNumberField = forwardRef(
       }
 
       return true;
-    }
-    return <>
-
-      <StyledBox
-        disabled={disabled || null}
-        errorinput={inputError ? 1 : undefined}
-        ref={boxRef}
-      >
-        <LeftIcon iconify={bxPhone} color={"componentPrimary"} size={"17"} disabled={disabled} inputError={inputError} />
-
-        <div
-          style={{
-            display: "inline-block",
-            paddingTop: "2px",
-          }}
-        >
-          <SearchSelect
-            defaultValue={options.defaultRegion}
-            options={selectOptions}
-            showList={options.showList}
-            searchLength={options.searchLength}
-            size={"sm"}
-            width={"60px"}
-            maxHeight={"200px"}
-            selectOption={options.selectOption}
-            containerRef={boxRef}
-            containerOffset={"-38px"}
-            ref={selectRef}
-            onChange={selectOnChange}
-            data-testid="regioncode"
-            id="region-select"
-            name="region-select"
-            tabIndex="0"
-          />
-        </div>
-
-        <Input
-          ref={ref}
-          isIcon={true}
-          borders={0}
+    };
+    return (
+      <>
+        <StyledBox
           disabled={disabled || null}
-          defaultValue={options.value}
-          data-isvalid={!inputError}
-          data-testid="phonenumber"
-          {...props}
-          paddingLeft={theme.sizeOptions[10]}
-          paddingRight={theme.sizeOptions[10]}
-          onChange={handleChange}
-          onBlur={(e) => {
-            //console.log("BLUR", e.relatedTarget)
-            //console.log("BLUR", e.relatedTarget.firstChild.id)
-            if (e.relatedTarget !== null && e.relatedTarget?.firstChild && e.relatedTarget.firstChild.id === "region-select") {
-              console.log("REGION SELECT CLICKED:...");
-              // ignore checking phonenumber...
-            } else {
-              const checkListStatus = document.querySelector('[data-select="open"]');
-              if (checkListStatus) {
-                console.log("ONBLUR EVENT CLOSE AUTOCOMPLETE ");
-                e.stopPropagation();
-                // close autocomplete options list.... 
-                checkListStatus.click();
+          errorinput={inputError ? 1 : undefined}
+          ref={boxRef}
+        >
+          <LeftIcon
+            iconify={bxPhone}
+            color={"componentPrimary"}
+            size={"17"}
+            disabled={disabled}
+            inputError={inputError}
+          />
+
+          <div
+            style={{
+              display: "inline-block",
+              paddingTop: "2px",
+            }}
+          >
+            <SearchSelect
+              defaultValue={options.defaultRegion}
+              options={selectOptions}
+              showList={options.showList}
+              searchLength={options.searchLength}
+              size={"sm"}
+              width={"60px"}
+              maxHeight={"200px"}
+              selectOption={options.selectOption}
+              containerRef={boxRef}
+              containerOffset={"-38px"}
+              ref={selectRef}
+              onChange={selectOnChange}
+              data-testid="regioncode"
+              id="region-select"
+              name="region-select"
+              tabIndex="0"
+            />
+          </div>
+
+          <Input
+            ref={ref}
+            isIcon={true}
+            borders={0}
+            disabled={disabled || null}
+            defaultValue={options.value}
+            data-isvalid={!inputError}
+            data-testid="phonenumber"
+            {...props}
+            paddingLeft={theme.sizeOptions[10]}
+            paddingRight={theme.sizeOptions[10]}
+            onChange={handleChange}
+            onBlur={e => {
+              //console.log("BLUR", e.relatedTarget)
+              //console.log("BLUR", e.relatedTarget.firstChild.id)
+              if (
+                e.relatedTarget !== null &&
+                e.relatedTarget?.firstChild &&
+                e.relatedTarget.firstChild.id === "region-select"
+              ) {
+                console.log("REGION SELECT CLICKED:...");
+                // ignore checking phonenumber...
+              } else {
+                const checkListStatus = document.querySelector(
+                  '[data-select="open"]',
+                );
+                if (checkListStatus) {
+                  console.log("ONBLUR EVENT CLOSE AUTOCOMPLETE ");
+                  e.stopPropagation();
+                  // close autocomplete options list....
+                  checkListStatus.click();
+                }
+                console.log("ONBLUR EVENT OK");
+                //check phonenumber
+                checkInput(false, true);
               }
-              console.log("ONBLUR EVENT OK");
-              //check phonenumber
-              checkInput(false, true);
-
-            }
-          }}
-          onKeyDown={e => {
-            if (e.key === "Enter") {
-              checkInput(false, true);
-            }
-          }}
-        />
-
-      </StyledBox>
-      {!options.toast && !invalidTxt !== "" && inputError && (
-        <Box mt={0} mb={10}>
-          <Text textStyle={"caption2"} color={theme.colors.baseError}>
-            {invalidTxt}
-          </Text>
-        </Box>
-      )}
-      {promptTxt !== "" && !inputError && (
-        <Box mt={0} mb={10}>
-          <Text textStyle={"caption2"} color={theme.colors.baseSecondary}>
-            {promptTxt}
-          </Text>
-        </Box>
-      )}
-    </>
-  });
+            }}
+            onKeyDown={e => {
+              if (e.key === "Enter") {
+                checkInput(false, true);
+              }
+            }}
+          />
+        </StyledBox>
+        {!options.toast && !invalidTxt !== "" && inputError && (
+          <Box mt={0} mb={10}>
+            <Text textStyle={"caption2"} color={theme.colors.baseError}>
+              {invalidTxt}
+            </Text>
+          </Box>
+        )}
+        {promptTxt !== "" && !inputError && (
+          <Box mt={0} mb={10}>
+            <Text textStyle={"caption2"} color={theme.colors.baseSecondary}>
+              {promptTxt}
+            </Text>
+          </Box>
+        )}
+      </>
+    );
+  },
+);
 
 PhoneNumberField.propTypes = {
   disabled: PropTypes.bool,
   options: PropTypes.object,
   selectOptions: PropTypes.array,
-  inputState: PropTypes.func
+  inputState: PropTypes.func,
 };
 
 export default PhoneNumberField;

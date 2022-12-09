@@ -44,9 +44,9 @@ const ListItem = styled.li`
 
 const PopperContainer = styled.div`
   padding: 15px;
-  padding-bottom:24px;
+  padding-bottom: 24px;
   box-shadow: ${props =>
-    props.theme.boxShadows[5]}; //0px 4px 8px rgba(91, 92, 91, 0.2); from theme
+    props.theme.boxShadows[5]}; //0px 4px 8px rgba(91, 92, 91, 0.2); from theme
   border-radius: 5px; // from theme
   background-color: ${props =>
     props.theme.colors.baseWhite}; // #f5f8f7;  from theme

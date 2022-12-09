@@ -16,6 +16,11 @@ const subtleHiover = "#373436";
 
 const textMuted = "#969595";
 
+const modalListItem = "#e7dbf0";
+const borderLeftBoxColor = "#eaecf0";
+const categoryBadgeBG = "#d5e7fb";
+const fullWhite = "#f5f8f7";
+const toolTipBG = "#222";
 const colors = {
   //   textPrimary: baseWhite,
   textMuted: textMuted,
@@ -35,6 +40,12 @@ const colors = {
   text: {
     muted: baseBright,
   },
+
+  modalListItem,
+  borderLeftBoxColor,
+  categoryBadgeBG,
+  fullWhite,
+  toolTipBG,
 };
 
 const componentStyles = {

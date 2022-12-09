@@ -15,10 +15,12 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import { i18n } from "@prifina-apps/utils";
 
-
 import * as C from "../pages/display-app/components";
 
 i18n.init();
+
+const theme = useTheme();
+const { colors } = useTheme();
 
 const List = styled("ul")`
   margin: 0;
@@ -36,10 +38,10 @@ const ListItem = styled.li`
   padding: 2px 14px 2px 0px;
 
   &.active {
-    background: #e7dbf0;
+    background: ${props => props.theme.colors.modalListItem};
   }
   &:hover {
-    background: #e7dbf0;
+    background: ${props => props.theme.colors.modalListItem};
   }
   cursor: pointer;
   height: 40px;
@@ -56,10 +58,6 @@ const AddWidgetModal = ({
   addWidget,
   ...props
 }) => {
-
-  const { colors } = useTheme();
-  const theme = useTheme();
-
   console.log("current view widgets", widgetSettings);
   console.log("widgetConfig", widgetConfigs);
 
@@ -71,11 +69,14 @@ const AddWidgetModal = ({
     e.preventDefault();
   };
 
-  const [availableWidgets, setAvailableWidgets] = useState(widgetConfigs.filter(w => {
-
-    return (widgetSettings.find(installed => installed.appId === w.widget.appID) === undefined)
-
-  }))
+  const [availableWidgets, setAvailableWidgets] = useState(
+    widgetConfigs.filter(w => {
+      return (
+        widgetSettings.find(installed => installed.appId === w.widget.appID) ===
+        undefined
+      );
+    }),
+  );
 
   console.log("AVAILABLE ", availableWidgets);
 
@@ -83,17 +84,17 @@ const AddWidgetModal = ({
 
   //const [selectedWidgets, setSelectedWidgets] = useState([]);
 
-
   const handleAddToArray = e => {
     e.preventDefault();
     //setActiveViewArray(oldArray => [...oldArray, activeItem]);
-    const selectedAppID = availableWidgets[activeItem].widget.appID
+    const selectedAppID = availableWidgets[activeItem].widget.appID;
     //console.log(selectedAppID);
     addWidget(selectedAppID);
-    setAvailableWidgets(availableWidgets.filter(w => w.widget.appID !== selectedAppID));
-    // is 0 good here... 
+    setAvailableWidgets(
+      availableWidgets.filter(w => w.widget.appID !== selectedAppID),
+    );
+    // is 0 good here...
     setActiveItem(0);
-
   };
 
   /*
@@ -160,58 +161,75 @@ const AddWidgetModal = ({
           <ModalBody style={{ overflow: "hidden" }}>
             <Flex>
               <Box style={{ height: "100%", width: 264, overflowY: "scroll" }}>
-                {availableWidgets.length === 0 &&
+                {availableWidgets.length === 0 && (
                   <Text fontSize="sm" color={colors.textMuted}>
                     No available widgets
                   </Text>
-                }
-                {availableWidgets.length > 0 && <>
-                  <Text fontSize="sm" color={colors.textMuted}>
-                    Available now
-                  </Text>
-                  <Box>
-
-                    <List>
-                      {availableWidgets.map((item, index) => (
-                        <ListItem key={index} className={`${activeItem === index ? "active" : null}`} onClick={onOptionClicked(index)}>
-                          <Image
-                            src={item.widget.icon}
-                            width="21px"
-                            height="21px"
-                          />
-                          <Text ml={8}>{item.widget.title}</Text>
-                        </ListItem>
-                      ))}
-                    </List>
-                  </Box>
-                </>
-                }
+                )}
+                {availableWidgets.length > 0 && (
+                  <>
+                    <Text fontSize="sm" color={colors.textMuted}>
+                      Available now
+                    </Text>
+                    <Box>
+                      <List>
+                        {availableWidgets.map((item, index) => (
+                          <ListItem
+                            key={index}
+                            className={`${
+                              activeItem === index ? "active" : null
+                            }`}
+                            onClick={onOptionClicked(index)}
+                          >
+                            <Image
+                              src={item.widget.icon}
+                              width="21px"
+                              height="21px"
+                            />
+                            <Text ml={8}>{item.widget.title}</Text>
+                          </ListItem>
+                        ))}
+                      </List>
+                    </Box>
+                  </>
+                )}
               </Box>
               <Box
                 width="320px"
-                style={{ borderLeft: "1px solid #EAECF0", paddingLeft: 22 }}
+                style={{
+                  borderLeft: `1px solid ${theme.colors.borderLeftBoxColor}`,
+                  paddingLeft: 22,
+                }}
               >
-                {availableWidgets.length > 0 && <>
-                  <Flex mb={10} justifyContent="space-between">
-                    <Image
-                      src={availableWidgets[activeItem]?.widget.icon}
-                      width="64px"
-                      height="64px"
-                    />
-                    <C.CategoryBadge style={{ background: "#D5E7FB" }}>
-                      {/* Category  */}
-                      {availableWidgets[activeItem]?.widget.category || "Category"}
-                    </C.CategoryBadge>
-                  </Flex>
+                {availableWidgets.length > 0 && (
+                  <>
+                    <Flex mb={10} justifyContent="space-between">
+                      <Image
+                        src={availableWidgets[activeItem]?.widget.icon}
+                        width="64px"
+                        height="64px"
+                      />
+                      <C.CategoryBadge
+                        style={{
+                          background: `${theme.colors.categoryBadgeBG}`,
+                        }}
+                      >
+                        {/* Category  */}
+                        {availableWidgets[activeItem]?.widget.category ||
+                          "Category"}
+                      </C.CategoryBadge>
+                    </Flex>
 
-                  <Text fontWeight={500}>{availableWidgets[activeItem]?.widget.title}</Text>
-                  <Box style={{ overflowY: "scroll", maxHeight: 75 }}>
-                    <Text color={colors.textMuted}>
-                      {availableWidgets[activeItem]?.widget.shortDescription}
+                    <Text fontWeight={500}>
+                      {availableWidgets[activeItem]?.widget.title}
                     </Text>
-                  </Box>
-                </>
-                }
+                    <Box style={{ overflowY: "scroll", maxHeight: 75 }}>
+                      <Text color={colors.textMuted}>
+                        {availableWidgets[activeItem]?.widget.shortDescription}
+                      </Text>
+                    </Box>
+                  </>
+                )}
                 <Flex
                   flexDirection="column"
                   justifyContent="center"
@@ -220,7 +238,11 @@ const AddWidgetModal = ({
                   <Button
                     mb={12}
                     onClick={handleAddToArray}
-                    disabled={availableWidgets.length === 0 || widgetSettings.length > 7 ? true : false}
+                    disabled={
+                      availableWidgets.length === 0 || widgetSettings.length > 7
+                        ? true
+                        : false
+                    }
                   >
                     Add to ‘{viewName}’
                   </Button>
@@ -232,7 +254,6 @@ const AddWidgetModal = ({
                   </Button>
                 </Flex>
               </Box>
-
             </Flex>
           </ModalBody>
         </ModalContent>
@@ -246,7 +267,6 @@ AddWidgetModal.propTypes = {
   widgetSettings: PropTypes.array.isRequired,
   widgetConfigs: PropTypes.array.isRequired,
   viewName: PropTypes.string,
-  addWidget: PropTypes.func.isRequired
-
+  addWidget: PropTypes.func.isRequired,
 };
 export default AddWidgetModal;

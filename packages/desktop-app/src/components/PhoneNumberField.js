@@ -23,7 +23,7 @@ const StyledBox = styled("div")`
       ? props.height
       : props.theme.componentStyles.input.base.height};
 
-  background-color: #f5f8f7;
+  background-color: ${props => props.theme.colors.fullWhite};
 
   /*
       background-color: ${props =>
